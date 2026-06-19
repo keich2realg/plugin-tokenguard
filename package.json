@@ -1,0 +1,64 @@
+{
+  "name": "@keich2realg/plugin-tokenguard",
+  "version": "0.1.0",
+  "description": "ElizaOS plugin: pre-trade ERC-20 honeypot & risk checks for agents via TokenGuard (pay-per-call x402, USDC on Base).",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": ["dist"],
+  "keywords": [
+    "elizaos",
+    "elizaos-plugin",
+    "x402",
+    "honeypot",
+    "token-risk",
+    "defi",
+    "ai-agents",
+    "base"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "x402-fetch": "^1.2.0",
+    "viem": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@elizaos/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@elizaos/core": "^1.7.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  },
+  "agentConfig": {
+    "pluginType": "elizaos:plugin:1.0.0",
+    "pluginParameters": {
+      "EVM_PRIVATE_KEY": {
+        "type": "string",
+        "description": "Private key of the agent's EVM wallet (funded with a little USDC on Base) used to pay per call via x402.",
+        "required": true,
+        "sensitive": true
+      },
+      "TOKENGUARD_URL": {
+        "type": "string",
+        "description": "Base URL of the TokenGuard API.",
+        "required": false,
+        "default": "https://tokenguard-api-sssu.onrender.com"
+      }
+    }
+  }
+}
